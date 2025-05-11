@@ -1,26 +1,21 @@
 package authentication_Scenarios.pages;
 
-<<<<<<< HEAD
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
-=======
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-<<<<<<< HEAD
 import java.util.*;
 
-import static junit.framework.Assert.assertEquals;
 
-=======
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 public class DashboardPage extends BasePage {
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
-<<<<<<< HEAD
+
 
     @FindBy(xpath = "//span[contains(.,'Logout')]")
     public WebElement LogoutButton;
@@ -33,16 +28,12 @@ public class DashboardPage extends BasePage {
 //locator for last activites
     @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[1]")
     public WebElement activity1;
-=======
-@FindBy(xpath = "//span[@class='pi pi-sign-out p-button-icon ng-star-inserted']")
-    WebElement LogoutButton;
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
+
 
     public void clickLogoutButton() {
         clickOnButton(LogoutButton);
     }
 
-<<<<<<< HEAD
     // Verify Specific Plan Details
     public void verifySpecificPlanDetails() {
         Map<String, String> expectedPlans = new HashMap<>();
@@ -169,14 +160,4 @@ public class DashboardPage extends BasePage {
 
     }
 
-=======
-    // Add any specific elements or methods related to the dashboard page here
-    // For example:
-    // @FindBy(xpath = "//h1[contains(text(),'Dashboard')]")
-    // private WebElement dashboardHeader;
-
-    // public void verifyDashboardHeader() {
-    //     Assert.assertTrue(dashboardHeader.isDisplayed(), "Dashboard header is not displayed");
-    // }
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 }
