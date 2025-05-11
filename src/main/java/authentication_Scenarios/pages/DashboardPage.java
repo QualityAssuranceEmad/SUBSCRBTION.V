@@ -28,7 +28,7 @@ public class DashboardPage extends BasePage {
 //locator for last activites
     @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[1]")
     public WebElement activity1;
-
+//ojhioiho
 
     public void clickLogoutButton() {
         clickOnButton(LogoutButton);
