@@ -22,7 +22,7 @@ private static Properties LoadProperties(String path) {
     }
     return properties;
 }
-<<<<<<< HEAD
+
     public static Properties userData2=LoadProperties(System.getProperty("user.dir") + "\\src\\test\\java\\data\\invalidLoginData.properties");
 
     private static Properties LoadProperties2(String path2) {
@@ -39,7 +39,5 @@ private static Properties LoadProperties(String path) {
         }
         return properties;
     }
-=======
 
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 }

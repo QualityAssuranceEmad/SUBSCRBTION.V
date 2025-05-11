@@ -33,11 +33,11 @@ public class Registration_with_invalid_data extends BaseTest {
 
     }
     @Test(priority = 2)
-<<<<<<< HEAD
+
     public void RegisterExistingUserTests() throws Exception {
-=======
-    public void SignUpDataAlreadyEmailExit() throws Exception {
->>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
+
+
+
         registerObject = new SignUpPage(driver);
         driver.navigate().refresh();
         jsonReader.JsonReader();
