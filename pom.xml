@@ -20,12 +20,15 @@
                 </argLine>
             </configuration>
 
+<<<<<<< HEAD
 
         </plugin>
         <plugin>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-maven</artifactId>
             <version>2.11.2</version>
+=======
+>>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
         </plugin>
     </plugins>
 </build>

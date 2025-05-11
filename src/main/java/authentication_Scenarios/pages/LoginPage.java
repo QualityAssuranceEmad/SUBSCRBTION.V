@@ -28,6 +28,7 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//button[contains(.,'Login')]")
     private   WebElement Login_button;
+<<<<<<< HEAD
     @FindBy(xpath = "//div[contains(@class,'user-page-head')]")
     private   WebElement Dashboard;
     //Validations on invalid login
@@ -35,6 +36,10 @@ public class LoginPage extends BasePage {
     public WebElement InvalidLoginAlert;
     @FindBy(id = "remember")
     public WebElement RememberMeAlert;
+=======
+    @FindBy(xpath = "//div[@class='flex-1 user-page-head']")
+    private   WebElement Dashboard;
+>>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 
 
     //actions
@@ -51,7 +56,10 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf((WebElement) Email));
         setValueOnField((WebElement) Email, email);
         setValueOnField((WebElement) Password, pass);
+<<<<<<< HEAD
         clickOnButton(RememberMeAlert);
+=======
+>>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
         clickOnButton((WebElement) Login_button);
     }
     public void AssertHomePAge()
@@ -65,6 +73,7 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(expectedUrl , "http://subscription.advintic.com:6691/home" );
         Assert.assertEquals(Dashboard.getText(), "Dashboard");
     }
+<<<<<<< HEAD
     public void checkInvalidLogin() {
        String expectedAlert = "Invalid credentials";
         // Wait for the alert to be visible
@@ -73,6 +82,9 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(InvalidLoginAlert.getText(), expectedAlert);
 
     }
+=======
+
+>>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 
 }
 
@@ -82,5 +94,9 @@ public class LoginPage extends BasePage {
 
 
 
+<<<<<<< HEAD
+=======
+    //Validations
+>>>>>>> b4774f575f14dc8fb8cf29ea7f1e1a7f972a519d
 
 
