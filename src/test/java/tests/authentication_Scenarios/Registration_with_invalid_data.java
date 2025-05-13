@@ -1,16 +1,15 @@
 package tests.authentication_Scenarios;
 
-import authentication_Scenarios.pages.DashboardPage;
-import authentication_Scenarios.pages.LoginPage;
-import authentication_Scenarios.pages.SignUpPage;
+import authentication_Scenarios.pages.Login_Page;
+import authentication_Scenarios.pages.SignUp_Page;
 import data.JsonDataReaderForSignUp;
 import data.LoadProperties;
 import org.testng.annotations.Test;
 import tests.BaseTest;
 
 public class Registration_with_invalid_data extends BaseTest {
-    SignUpPage registerObject;
-    LoginPage loginObject;
+    SignUp_Page registerObject;
+    Login_Page loginObject;
     JsonDataReaderForSignUp jsonReader = new JsonDataReaderForSignUp();
     String fn= LoadProperties.userData.getProperty("firstname");
     String ln= LoadProperties.userData.getProperty("lastname");
@@ -20,8 +19,8 @@ public class Registration_with_invalid_data extends BaseTest {
     String confPass= LoadProperties.userData.getProperty("confirmPass");
     @Test(priority = 1)
     public void SignUpWithInvalidData() throws Exception {
-        loginObject = new LoginPage(driver);
-        registerObject = new SignUpPage(driver);
+        loginObject = new Login_Page(driver);
+        registerObject = new SignUp_Page(driver);
         loginObject.clickSignUpLinck();
         registerObject.signUp(fn,ln,phone,em,pass,confPass);
         registerObject.FirstNameValidation.isDisplayed();
@@ -38,7 +37,7 @@ public class Registration_with_invalid_data extends BaseTest {
 
 
 
-        registerObject = new SignUpPage(driver);
+        registerObject = new SignUp_Page(driver);
         driver.navigate().refresh();
         jsonReader.JsonReader();
         registerObject.signUp(jsonReader.firstName, jsonReader.lastName, jsonReader.mobile, jsonReader.email,

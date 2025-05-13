@@ -1,6 +1,6 @@
 package tests.userLogin;
 
-import authentication_Scenarios.pages.LoginPage;
+import authentication_Scenarios.pages.Login_Page;
 import tests.BaseTest;
 import data.JsonDataReaderForLogin;
 import io.qameta.allure.*;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 public class LoginTest extends BaseTest {
-    LoginPage loginObject;
+    Login_Page loginObject;
 
     @Test
     @Description("This test attempts to log into the website using a login and a password. Fails if any error happens.\n\nNote that this test does not test 2-Factor Authentication.")
@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest {
     @Feature("Essential features")
     @Story("Authentication")
     public void loginToThePlatform() throws IOException, ParseException, InterruptedException {
-        loginObject = new LoginPage(driver);
+        loginObject = new Login_Page(driver);
         JsonDataReaderForLogin jsonDataReaderForLogin = new JsonDataReaderForLogin();
         jsonDataReaderForLogin.JsonReader();
       //  Thread.sleep(4000);

@@ -1,8 +1,8 @@
 package tests.userRegistration;
 
-import authentication_Scenarios.pages.DashboardPage;
-import authentication_Scenarios.pages.LoginPage;
-import authentication_Scenarios.pages.SignUpPage;
+import authentication_Scenarios.pages.Dashboard_Page;
+import authentication_Scenarios.pages.Login_Page;
+import authentication_Scenarios.pages.SignUp_Page;
 import tests.BaseTest;
 import data.JsonDataReaderForSignUp;
 import org.json.simple.parser.ParseException;
@@ -11,16 +11,16 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class SignUpTest extends BaseTest {
-    SignUpPage registerObject;
-    LoginPage loginObject;
-    DashboardPage dashboardObject;
+    SignUp_Page registerObject;
+    Login_Page loginObject;
+    Dashboard_Page dashboardObject;
     JsonDataReaderForSignUp jsonReader = new JsonDataReaderForSignUp();
 
     @Test(priority = 1)
     public void SignUpAndCheckProfile() throws IOException, ParseException, InterruptedException {
-        loginObject = new LoginPage(driver);
-        registerObject = new SignUpPage(driver);
-        dashboardObject = new DashboardPage(driver);
+        loginObject = new Login_Page(driver);
+        registerObject = new SignUp_Page(driver);
+        dashboardObject = new Dashboard_Page(driver);
         jsonReader.JsonReader();
         loginObject.clickSignUpLinck();
         registerObject.signUp(jsonReader.firstName, jsonReader.lastName, jsonReader.mobile, jsonReader.email,

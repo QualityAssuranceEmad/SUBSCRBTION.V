@@ -11,31 +11,53 @@ import org.openqa.selenium.support.FindBy;
 import java.util.*;
 
 
-public class DashboardPage extends BasePage {
-    public DashboardPage(WebDriver driver) {
+public class Dashboard_Page extends Base_Page {
+    public Dashboard_Page(WebDriver driver) {
         super(driver);
     }
 
 
     @FindBy(xpath = "//span[contains(.,'Logout')]")
-    public WebElement LogoutButton;
+    private WebElement LogoutButton;
+    @FindBy(xpath = "//span[@class='p-menu-item-label'][contains(.,'Dashboard')]")
+    private WebElement clickOnDashboard;
+    @FindBy(xpath = "//span[contains(.,'Billing Plans')]")
+    private WebElement clickOnBillingPlans;
+    @FindBy(xpath = "//span[contains(.,'Track Invoices')]")
+    private WebElement clickOnTrackInvoices;
+    @FindBy(xpath = "//span[contains(.,'Users & Teams')]")
+    private WebElement clickOnUsersAndTeams;
+    @FindBy(xpath = "//span[contains(.,'Activity Log')]")
+    private WebElement clickOnActivityLog;
+    @FindBy(xpath = "//span[contains(.,'Support Ticket')]")
+    private WebElement clickOnSupportTicket;
+    @FindBy(xpath = "//span[contains(.,'Profile')]")
+    private WebElement clickOnProfile;
+    @FindBy(xpath = "//span[contains(.,'FAQs')]")
+    private WebElement clickOnFAQs;
+    @FindBy(xpath = "//span[contains(.,'User Guide')]")
+    private WebElement clickOnUserGuide;
+    @FindBy(xpath = "//span[@class='pi pi-user p-button-icon']")
+    private WebElement clickOnProfileIcon;
+    @FindBy(xpath = "//span[@class='pi pi-cog p-button-icon']")
+    private WebElement clickOnSettings;
+    @FindBy(xpath = "//span[@class='pi pi-bell p-button-icon']")
+    private WebElement clickOnNotification;
+    @FindBy(linkText = "Contact us")
+    private WebElement clickOnContactUs;
+    @FindBy(linkText = "Terms and Privacy']")
+    private WebElement clickTermsAndPrivacy;
+    @FindBy(xpath = "(//a[@href='/user-faq'][contains(.,'FAQs')])[2]")
+    private WebElement clickFAQ;
+    @FindBy(xpath = "(//i[@class='pi pi-facebook']")
+    private WebElement clickOnFacebook;
+    @FindBy(xpath = "(//i[@class='pi pi-linkedin']")
+    private WebElement clickOnLinkedIn;
     @FindBy(xpath = "//span[@class='text-center']")
-    public WebElement planNameElement;
+    private WebElement planNameElement;
     @FindBy(xpath = "//span[@class='text-sm']")
-    public WebElement planTypeElement;
-    @FindBy(xpath = "//a[@href='/invoices'][contains(.,'View All')]")
-    public WebElement viewAllInvoices;
-//locator for last activites
-    @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[1]")
-    public WebElement activity1;
-    @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[2]")
-    public WebElement activity2;
-    @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[3]")
-    public WebElement activity3;
-    @FindBy(xpath = "(//div[@class='w-8/12 subject-label'])[4]")
-    public WebElement activity4;
-    @FindBy(xpath = "//a[@href='/activities'][contains(.,'View All')]")
-    public WebElement viewAllActivities;
+    private WebElement planTypeElement;
+
 
     public void clickLogoutButton() {
         clickOnButton(LogoutButton);
@@ -111,69 +133,23 @@ public class DashboardPage extends BasePage {
         }
     }
 
-    //verify latest invoices matching with last 4 in voices in invoice page
-    public void verifyLatestInvoicesMatching() {
-        // Click on the "View All" button to navigate to the invoices page
-        viewAllInvoices.click();
-        // Locate the table body
-        WebElement tableBody = driver.findElement(By.xpath("//table[@role='table']/tbody"));
+    public void verifyLatestActivitiesContent() {
+        // --- Get the latest activities from dashboard ---
+        List<WebElement> latestActivityElements = driver.findElements(By.xpath("//div[@class='w-8/12 subject-label']"));
+        System.out.println("Found " + latestActivityElements.size() + " latest activity items:");
 
-        // Find all the rows in the table body
-        List<WebElement> rows = tableBody.findElements(By.xpath("./tr"));
-
-        // Get the number of rows
-        int rowCount = rows.size();
-
-        // Extract the invoice codes from the last four rows
-        System.out.println("Last Four Invoice Codes:");
-        for (int i = 0; i < Math.min(4, rows.size()); i++) {
-            // Locate the 'Code' column cell within the current row
-            WebElement codeCell = rows.get(i).findElement(By.xpath("./td[5]")); // Assuming 'Code' is the 5th column
-
-            // Get the text from the 'Code' cell
-            String invoiceCode = codeCell.getText();
-            System.out.println(invoiceCode);
+        List<String> latestActivityTexts = new ArrayList<>();
+        for (WebElement activityElement : latestActivityElements) {
+            latestActivityTexts.add(activityElement.getText());
         }
+        System.out.println("Latest Activity Texts (List): " + latestActivityTexts);
+
+
     }
 
-    public void verifyLatestInvoicesMatchBetweenSections() {
-// --- Get the names of the latest invoices ---
-        List<WebElement> latestInvoiceNameElements = driver.findElements(By.xpath("//span[@class='name-label']"));
-        System.out.println("Found " + latestInvoiceNameElements.size() + " latest invoice items:");
-        // Assert.assertEquals(latestInvoiceNameElements.size(), 4, "Number of latest invoices should be 4"); // Keep this if the count is important
-
-        List<String> latestInvoiceNames = new ArrayList<>();
-        for (WebElement nameElement : latestInvoiceNameElements) {
-            latestInvoiceNames.add(nameElement.getText());
-            }
-        System.out.println("Latest Invoice Names (List): " + latestInvoiceNames);
-
-        clickOnButton(viewAllInvoices);
-
-        WebElement tableBody = driver.findElement(By.xpath("//table[@role='table']/tbody"));
-        List<WebElement> firstFourRows = tableBody.findElements(By.xpath("./tr"));
-        List<String> firstFourTableInvoiceNames = new ArrayList<>();
-        int count = Math.min(4, firstFourRows.size());
-        System.out.println("\nFirst " + count + " Invoice Codes from Table:");
-        for (int i = 0; i < count; i++) {
-            WebElement codeCell = firstFourRows.get(i).findElement(By.xpath("./td[5]")); // Assuming 'Code' is the 5th column
-            String invoiceCode = codeCell.getText();
-            firstFourTableInvoiceNames.add(invoiceCode);
-            System.out.println(invoiceCode);
-        }
-        System.out.println("First Four Table Invoice Names (List): " + firstFourTableInvoiceNames);
-
-        // Reverse the list from the table if needed to match the expected order of "latest invoices"
-        // Collections.reverse(firstFourTableInvoiceNames); // Uncomment this if a specific reverse order is expected
-
-        // --- Compare the two sets of invoice names (order-insensitive) ---
-        Set<String> latestInvoiceNamesSet = new HashSet<>(latestInvoiceNames);
-        Set<String> firstFourTableInvoiceNamesSet = new HashSet<>(firstFourTableInvoiceNames);
-
-        Assert.assertEquals("The latest invoice names do not match the first four table invoice names.", latestInvoiceNamesSet,
-                firstFourTableInvoiceNamesSet);
-
-
+    //profile
+    public void clickOnProfile() {
+        clickOnButton(clickOnProfile);
     }
 
 }
