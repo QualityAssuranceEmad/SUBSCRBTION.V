@@ -10,7 +10,7 @@ import tests.BaseTest;
 
 import java.io.IOException;
 
-public class Successful_user_registration extends BaseTest {
+public class SuccessfulUserRegistration extends BaseTest {
     SignUp_Page registerObject;
     Login_Page loginObject;
     Dashboard_Page dashboardObject;

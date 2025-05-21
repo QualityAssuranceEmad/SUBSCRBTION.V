@@ -2,6 +2,8 @@ package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +17,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilties.Helper;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -26,8 +29,8 @@ public class BaseTest {
         // Add more environment variables as needed
         Allure.addAttachment("Environment", "QA");
         Allure.addAttachment("Browser", "Chrome");
-
     }
+
     public static String downloadPath = System.getProperty("user.dir") + "\\Downloads";
 
     public static FirefoxOptions firefoxOption() {
@@ -44,7 +47,7 @@ public class BaseTest {
     public static ChromeOptions chromeOption() {
         ChromeOptions options = new ChromeOptions();
 
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.default.content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadPath);
         options.setExperimentalOption("prefs", chromePrefs);
@@ -54,7 +57,6 @@ public class BaseTest {
 
 
     @BeforeSuite
-
     @Parameters({"browser"})
     public void startDriver(@Optional("chrome") String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
@@ -70,8 +72,8 @@ public class BaseTest {
             WebDriverManager.safaridriver().setup();
             driver = new SafariDriver();
         } else if (browserName.equalsIgnoreCase("Microsoft Edge")) {
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
@@ -80,15 +82,27 @@ public class BaseTest {
 
     @AfterSuite
     public void stopDriver() {
-       //driver.quit();
+        //driver.quit();
     }
+
     @AfterMethod
     public void screenshotOnFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             System.out.println("Failed!");
             System.out.println("Taking Screenshot....");
-            Helper.captureScreenshot(driver, result.getName());
-            Helper.attachScreenshotToAllure(result.getName()); // Attach screenshot to Allure report
+            if (driver != null) {
+                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                Allure.addAttachment(result.getName() + "-failure-screenshot", "image/png", new ByteArrayInputStream(screenshot), "png");
+            }
+        }
+    }
+
+    @AfterMethod
+    void waitForNextTest() {
+        try {
+            Thread.sleep(1000); // Wait for 1 second
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

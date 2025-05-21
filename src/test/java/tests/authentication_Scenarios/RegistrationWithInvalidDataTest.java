@@ -7,7 +7,7 @@ import data.LoadProperties;
 import org.testng.annotations.Test;
 import tests.BaseTest;
 
-public class Registration_with_invalid_data extends BaseTest {
+public class RegistrationWithInvalidDataTest extends BaseTest {
     SignUp_Page registerObject;
     Login_Page loginObject;
     JsonDataReaderForSignUp jsonReader = new JsonDataReaderForSignUp();

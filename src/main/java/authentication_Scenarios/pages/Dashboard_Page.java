@@ -7,7 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.*;
 
 
@@ -58,7 +61,7 @@ public class Dashboard_Page extends Base_Page {
     @FindBy(xpath = "//span[@class='text-sm']")
     private WebElement planTypeElement;
 
-
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     public void clickLogoutButton() {
         clickOnButton(LogoutButton);
     }
@@ -149,7 +152,12 @@ public class Dashboard_Page extends Base_Page {
 
     //profile
     public void clickOnProfile() {
+        wait.until(ExpectedConditions.elementToBeClickable(clickOnProfile));
         clickOnButton(clickOnProfile);
+    }
+    public void clickOnTrackInvoices() {
+        wait.until(ExpectedConditions.elementToBeClickable(clickOnTrackInvoices));
+        clickOnButton(clickOnTrackInvoices);
     }
 
 }

@@ -1,6 +1,4 @@
 package utilties;
-
-import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +22,7 @@ public class Helper {
             System.out.println("Excpetion while taking screenshot"+ e.getMessage());
         }
     }
-    public static void attachScreenshotToAllure(String screenshotName) {
+   /* public static void attachScreenshotToAllure(String screenshotName) {
         Path screenshotPath = Paths.get("./Screenshots", screenshotName + ".png");
         if (Files.exists(screenshotPath)) {
             try {
@@ -32,7 +30,7 @@ public class Helper {
             } catch (IOException e) {
                 System.out.println("Failed to attach screenshot to Allure report: " + e.getMessage());
             }
-        }
+        }*/
     }
 
-}
+

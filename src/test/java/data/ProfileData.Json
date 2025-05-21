@@ -1,8 +1,7 @@
 [
   {
-
     "firstName": "Oliver",
-    "Lastname": "Jack",
+    "lastName1": "Jack",
     "jobTitle": "QA Engineer",
     "institution": "Advintic",
     "birth": "1998-01-1",
@@ -11,7 +10,29 @@
     "city": "New York",
     "governorate": "New York",
     "nationality": "Egyptian",
-    "zipCode": "31511"
+    "postalCode": "31511",
+    "invalidFirstName": "12345#$#67890",
+    "TooLongFirstName": "rulesforeajhhchuuofthesefieldsKeepinmindthattheexac",
+    "TooShortFirstName": "e",
+    "FirstNameSpaces": "E  m ad",
+    "invalidLastName": "12345678#@$90",
+    "TooLongLastName": "rulesforeajhhchuuofthesefieldsKeepinmindthattheexac",
+    "TooShortLastName": "e",
+    "LastNameSpaces": "E  m ad",
+    "invalidJobTitle": "1234567890",
+    "invalidInstitution": "1234567890",
+    "invalidCity": "1234567890",
+    "invalidGovernorate": "1234567890",
+    "invalidNationality": "1234567890",
+    "invalidPostalCode": "1234567890",
+    "TooShortJobTitle": "e",
+    "TooShortInstitution": "e",
+    "TooShortCity": "e",
+    "TooShortGovernorate": "e",
+    "TooShortNationality": "e",
+    "Address": "cairo",
+    "invalidAddress": "1234567890"
+
 
 
   }

@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="UserLoginTests">
-    <test name="LoginFunctionality">
+    <test name="LoginPositiveScenario">
         <classes>
-            <class name="tests.userLogin.LoginTest"/>
+            <class name="tests.authentication_Scenarios.LoginWithValidData"/>
         </classes>
     </test>
 </suite>

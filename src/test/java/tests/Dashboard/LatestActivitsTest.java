@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import tests.BaseTest;
 import java.io.IOException;
 
-public class Latest_Activits_Test  extends BaseTest {
+public class LatestActivitsTest extends BaseTest {
     Login_Page loginObject;
     Dashboard_Page dashObject;
     @Test

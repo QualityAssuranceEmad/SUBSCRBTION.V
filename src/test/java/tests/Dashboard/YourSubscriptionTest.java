@@ -9,7 +9,7 @@ import tests.BaseTest;
 
 import java.io.IOException;
 
-public class Your_Subscription_Test extends BaseTest {
+public class YourSubscriptionTest extends BaseTest {
 Login_Page loginObject;
 Dashboard_Page dashObject;
 @Test

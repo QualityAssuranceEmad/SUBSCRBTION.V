@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,8 +22,19 @@ public class Track_Invoices_Page extends Base_Page{
     public WebElement viewAllInvoices;
     @FindBy(xpath = "(//th[@class='p-datatable-sortable-column ng-star-inserted'])[4]")
     public WebElement clickOnCodeArrange;
+    //pagination count in track invoices
+    @FindBy(xpath = "//button[@aria-label='First Page']")
+    public WebElement pageArrowClickFirst;
+    @FindBy(xpath = "//button[@aria-label='Last Page']")
+    public WebElement pageArrowClick;
+    @FindBy(xpath = "//button[@aria-label='Next Page']")
+    public WebElement pageArrowClickNext;
+    @FindBy(xpath = "//tr[@class='ng-star-inserted']/parent::thead")
+    public WebElement numberOfRows;
+    @FindBy(xpath = "//button[@class='p-ripple p-paginator-page p-paginator-page-selected ng-star-inserted']")
+    public WebElement paginationCount;
 
-
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     //verify latest invoices matching with last 4 in voices in invoice page
     public void verifyLatestInvoicesMatching() {
         // Click on the "View All" button to navigate to the invoices page
@@ -81,6 +95,72 @@ public class Track_Invoices_Page extends Base_Page{
 
         Assert.assertEquals("The latest invoice names do not match the first four table invoice names.", latestInvoiceNamesSet,
                 firstFourTableInvoiceNamesSet);
+
+
+    }
+    public void verifyPaginationCount() throws InterruptedException {
+
+        wait.until(ExpectedConditions.elementToBeClickable(pageArrowClick));
+        clickOnButton(pageArrowClick);
+        String paginationText = paginationCount.getText();
+        // Print the pagination text
+        System.out.println("Pagination Count: " + paginationText);
+        // Extract the number from the text
+        String[] parts = paginationText.split(" ");
+        int paginationCountValue = Integer.parseInt(parts[0]);
+        System.out.println("Extracted Pagination Count: " + paginationCountValue);
+        // Click on the first page button
+        wait.until(ExpectedConditions.elementToBeClickable(pageArrowClickFirst));
+        clickOnButton(pageArrowClickFirst);
+        ////////////////////////////////////////
+        Thread.sleep(2000);
+        boolean hasNextPage = true;
+        int pageCount = 1;
+
+        while (hasNextPage) {
+            System.out.println("===== Processing Page " + pageCount + " =====");
+
+            // Print table headers
+            WebElement table = driver.findElement(By.cssSelector("table.p-datatable-table"));
+            List<WebElement> headers = table.findElements(By.cssSelector("thead th"));
+            System.out.println("\nTable Headers:");
+            for (WebElement header : headers) {
+                System.out.print(header.getText() + " | ");
+            }
+            System.out.println("\n" + "-".repeat(80));
+
+            // Print table rows
+            List<WebElement> rows = table.findElements(By.cssSelector("tbody tr"));
+            System.out.println("\nTable Data:");
+            for (WebElement row : rows) {
+                List<WebElement> cells = row.findElements(By.cssSelector("td"));
+                for (WebElement cell : cells) {
+                    System.out.print(cell.getText() + " | ");
+                }
+                System.out.println();
+            }
+
+            // Check for next page
+            try {
+                WebElement nextButton = driver.findElement(By.cssSelector("button.p-paginator-next"));
+                if (nextButton.isEnabled() && !nextButton.getAttribute("class").contains("p-disabled")) {
+                    System.out.println("\nMoving to next page...");
+                    nextButton.click();
+                    // Wait for page to load
+                    Thread.sleep(2000);
+                    pageCount++;
+                } else {
+                    hasNextPage = false;
+                    System.out.println("\nNo more pages available");
+                }
+            } catch (Exception e) {
+                hasNextPage = false;
+                System.out.println("\nPagination not found or last page reached");
+            }
+        }
+
+        System.out.println("\nFinished processing all pages");
+
 
 
     }

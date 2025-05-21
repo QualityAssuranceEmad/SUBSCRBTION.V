@@ -9,7 +9,7 @@ import tests.BaseTest;
 
 import java.io.IOException;
 
-public class Last_Invoices_Test extends BaseTest {
+public class LastInvoicesTest extends BaseTest {
     Login_Page loginObject;
     Dashboard_Page dashObject;
     @Test
