@@ -74,7 +74,7 @@ WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         expectedPlans.put("Insurance.V", "Medium");
         expectedPlans.put("PAX.V", "Basic");
         expectedPlans.put("consult.V", "Basic");
-        // Get all subscribed plan items
+        // Get all subscribed plan items///////////////////
         List<WebElement> subscribedPlans = driver.findElements(By.cssSelector("div.subscribed-plans-item"));
 
         // Handle the case where no plans are found
