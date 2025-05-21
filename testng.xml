@@ -3,6 +3,7 @@
     <test name="LoginPositiveScenario">
         <classes>
             <class name="tests.authentication_Scenarios.LoginWithValidData"/>
+            <class name="tests.ProfileCreationPositiveTests"/>
         </classes>
     </test>
 </suite>

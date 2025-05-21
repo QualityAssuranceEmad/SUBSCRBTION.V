@@ -20,7 +20,7 @@ public class Dashboard_Page extends Base_Page {
     }
 
 
-    @FindBy(xpath = "//span[contains(.,'Logout')]")
+    @FindBy(xpath = "//button[./span[contains(@class, 'pi-sign-out')]]")
     private WebElement LogoutButton;
     @FindBy(xpath = "//span[@class='p-menu-item-label'][contains(.,'Dashboard')]")
     private WebElement clickOnDashboard;
